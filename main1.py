@@ -32,11 +32,13 @@ color_map = [
 ]
 
 for i in range(32):
-    line, = ax.plot([], [], color=color_map[i], linewidth=1)
+    line, = ax.plot([], [], color=color_map[i], linewidth=4)
     lines.append(line)
+y_max = 255
+y_min = 0
 
 ax.set_xlim(0, desired_time_steps)
-ax.set_ylim(0, 255)
+ax.set_ylim(y_min, y_max)
 ax.set_xlabel('Time Steps')
 ax.set_ylabel('Amplitude')
 ax.set_title('EEG Monitor')
@@ -45,8 +47,8 @@ ax.grid(True, which='both', linestyle='--', alpha=0.5)
 # Label axes similar to your Processing code
 ax.set_xticks(np.linspace(0, desired_time_steps, num=13))
 ax.set_xticklabels([f"{int(t)}" for t in np.linspace(0, desired_time_steps, num=13)])
-ax.set_yticks(np.linspace(0, 255, num=17))
-ax.set_yticklabels([f"{int(t)}" for t in np.linspace(0, 255, num=17)])
+ax.set_yticks(np.linspace(y_min, y_max, num=17))
+ax.set_yticklabels([f"{int(t)}" for t in np.linspace(y_min, y_max, num=17)])
 
 # Update function for animation
 def update(frame):
@@ -80,7 +82,7 @@ def update(frame):
         return []
 
 # Animation
-ani = animation.FuncAnimation(fig, update, interval=10, blit=True)
+ani = animation.FuncAnimation(fig, update, interval=1, blit=True)
 
 # Show the plot
 plt.show()
