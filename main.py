@@ -5,8 +5,10 @@ import numpy as np
 
 # Serial port configuration
 BAUD_RATE = 115200
-SERIAL_PORT = '/dev/cu.usbserial-110'  # Replace 'COM3' with your Arduino's serial port
 
+# Windows: Replace 'COM3' with your Arduino's serial port
+# Mac: Replace '/dev/cu.usbserial-110' with your Arduino's serial port check using ls /dev/cu.*
+SERIAL_PORT = '/dev/cu.usbserial-110'
 # Initialize serial port
 try:
     ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
@@ -32,9 +34,9 @@ color_map = [
 ]
 
 for i in range(32):
-    line, = ax.plot([], [], color=color_map[i], linewidth=4)
+    line, = ax.plot([], [], color=color_map[i], linewidth=1)
     lines.append(line)
-y_max = 255
+y_max = 50
 y_min = 0
 
 ax.set_xlim(0, desired_time_steps)
